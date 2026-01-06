@@ -1,22 +1,32 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
+﻿using DevExpress.Utils.DirectXPaint;
 using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using System;
+using System.Data;
 using System.Data.SqlClient;
+using System.Windows.Forms;
+using System.Drawing;
 
 namespace GözHastaneOtomasyonu
 {
     public partial class FrmDoktorlar : BaseForm
 
     {
+        LabelControl lblID;
+        LabelControl lblAd;
+        LabelControl lblSoyad;
+        LabelControl lblBrans;
+        LabelControl lblTC;
+        LabelControl lblTelefon;
         public FrmDoktorlar()
         {
             InitializeComponent();
             LayoutDuzenle(); // Tasarımı hazırlar
             Listele();       // Mevcut doktorları getirir
             BransGetir();    // Branş kutusunu ayarlar
+            LabelStilUygula();
+
         }
         protected override void OnShown(EventArgs e)
         {
@@ -173,61 +183,127 @@ namespace GözHastaneOtomasyonu
         private void LayoutDuzenle()
         {
             this.Text = "Doktor Kayıt Paneli";
-            this.Size = new System.Drawing.Size(1250, 750);
+            this.Size = new Size(1250, 750);
 
-            // Tablo Ayarları
             gridControl1.Parent = this;
             gridControl1.Dock = DockStyle.Fill;
             gridControl1.MainView = gridView1;
             gridView1.OptionsView.ShowGroupPanel = false;
 
-            // Yan Panel
             groupControl1.Parent = this;
             groupControl1.Text = "DOKTOR BİLGİLERİ";
             groupControl1.Dock = DockStyle.Right;
             groupControl1.Width = 350;
 
-            // Olayları Bağlama
-            btnKaydet.Click += btnKaydet_Click;
-            btnSil.Click += btnSil_Click;
-            btnGuncelle.Click += btnGuncelle_Click;
-            gridView1.FocusedRowChanged += gridView1_FocusedRowChanged;
-
-            // Yerleşim Kodları
             int y = 50;
-            new LabelControl { Parent = groupControl1, Text = "ID:", Location = new System.Drawing.Point(20, y) };
-            txtID.Parent = groupControl1; txtID.Location = new System.Drawing.Point(110, y); txtID.Width = 200; txtID.ReadOnly = true;
+
+            lblID = new LabelControl();
+            lblID.Text = "ID:";
+            lblID.Parent = groupControl1;
+            lblID.Location = new Point(20, y);
+
+            txtID.Parent = groupControl1;
+            txtID.Location = new Point(110, y);
+            txtID.Width = 200;
+            txtID.ReadOnly = true;
 
             y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Ad:", Location = new System.Drawing.Point(20, y) };
-            txtAd.Parent = groupControl1; txtAd.Location = new System.Drawing.Point(110, y); txtAd.Width = 200;
+
+            lblAd = new LabelControl();
+            lblAd.Text = "Ad:";
+            lblAd.Parent = groupControl1;
+            lblAd.Location = new Point(20, y);
+
+            txtAd.Parent = groupControl1;
+            txtAd.Location = new Point(110, y);
+            txtAd.Width = 200;
 
             y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Soyad:", Location = new System.Drawing.Point(20, y) };
-            txtSoyad.Parent = groupControl1; txtSoyad.Location = new System.Drawing.Point(110, y); txtSoyad.Width = 200;
+
+            lblSoyad = new LabelControl();
+            lblSoyad.Text = "Soyad:";
+            lblSoyad.Parent = groupControl1;
+            lblSoyad.Location = new Point(20, y);
+
+            txtSoyad.Parent = groupControl1;
+            txtSoyad.Location = new Point(110, y);
+            txtSoyad.Width = 200;
 
             y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Branş:", Location = new System.Drawing.Point(20, y) };
-            cmbBrans.Parent = groupControl1; cmbBrans.Location = new System.Drawing.Point(110, y); cmbBrans.Width = 200;
 
-            // --- ÖNEMLİ: Kutuyu yazıya kapatan ayar ---
-            cmbBrans.Properties.TextEditStyle = DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
+            lblBrans = new LabelControl();
+            lblBrans.Text = "Branş:";
+            lblBrans.Parent = groupControl1;
+            lblBrans.Location = new Point(20, y);
+
+            cmbBrans.Parent = groupControl1;
+            cmbBrans.Location = new Point(110, y);
+            cmbBrans.Width = 200;
+            cmbBrans.Properties.TextEditStyle =
+                DevExpress.XtraEditors.Controls.TextEditStyles.DisableTextEditor;
 
             y += 40;
-            new LabelControl { Parent = groupControl1, Text = "TC:", Location = new System.Drawing.Point(20, y) };
-            txtTC.Parent = groupControl1; txtTC.Location = new System.Drawing.Point(110, y); txtTC.Width = 200;
+
+            lblTC = new LabelControl();
+            lblTC.Text = "TC:";
+            lblTC.Parent = groupControl1;
+            lblTC.Location = new Point(20, y);
+
+            txtTC.Parent = groupControl1;
+            txtTC.Location = new Point(110, y);
+            txtTC.Width = 200;
 
             y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Telefon:", Location = new System.Drawing.Point(20, y) };
-            txtTelefon.Parent = groupControl1; txtTelefon.Location = new System.Drawing.Point(110, y); txtTelefon.Width = 200;
+
+            lblTelefon = new LabelControl();
+            lblTelefon.Text = "Telefon:";
+            lblTelefon.Parent = groupControl1;
+            lblTelefon.Location = new Point(20, y);
+
+            txtTelefon.Parent = groupControl1;
+            txtTelefon.Location = new Point(110, y);
+            txtTelefon.Width = 200;
 
             y += 60;
-            btnKaydet.Parent = groupControl1; btnKaydet.Text = "Kaydet"; btnKaydet.Location = new System.Drawing.Point(110, y); btnKaydet.Width = 200;
-            y += 40;
-            btnGuncelle.Parent = groupControl1; btnGuncelle.Text = "Güncelle"; btnGuncelle.Location = new System.Drawing.Point(110, y); btnGuncelle.Width = 200;
-            y += 40;
-            btnSil.Parent = groupControl1; btnSil.Text = "Sil"; btnSil.Location = new System.Drawing.Point(110, y); btnSil.Width = 200;
+
+            btnKaydet.Parent = groupControl1;
+            btnKaydet.Text = "Kaydet";
+            btnKaydet.Location = new Point(110, y);
+            btnKaydet.Width = 200;
+
+            y += 60;
+
+            btnGuncelle.Parent = groupControl1;
+            btnGuncelle.Text = "Güncelle";
+            btnGuncelle.Location = new Point(110, y);
+            btnGuncelle.Width = 200;
+
+            y += 60;
+
+            btnSil.Parent = groupControl1;
+            btnSil.Text = "Sil";
+            btnSil.Location = new Point(110, y);
+            btnSil.Width = 200;
+
             UIHelper.GroupStandart(groupControl1);
+            LabelStilUygula();
+            UIHelper.ButtonPrimary(btnKaydet);
+            UIHelper.ButtonPrimary(btnGuncelle);
+            UIHelper.ButtonPrimary(btnSil);
+
+        }
+
+
+        void LabelStilUygula()
+            {
+                UIHelper.LabelStandart(lblID);
+                UIHelper.LabelStandart(lblAd);
+                UIHelper.LabelStandart(lblSoyad);
+                UIHelper.LabelStandart(lblBrans);
+                UIHelper.LabelStandart(lblTC);
+                UIHelper.LabelStandart(lblTelefon);
+            }
+
+
         }
     }
-}

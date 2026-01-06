@@ -195,65 +195,170 @@ namespace GözHastaneOtomasyonu
         {
             this.Text = "Randevu Sistemi";
             this.Size = new Size(1200, 700);
-            gridControl1.Parent = this; gridControl1.Dock = DockStyle.Fill;
-            gridControl1.MainView = gridView1; gridView1.OptionsView.ShowGroupPanel = false;
-            groupControl1.Parent = this; groupControl1.Text = "RANDEVU İŞLEMLERİ";
-            groupControl1.Dock = DockStyle.Right; groupControl1.Width = 350;
+
+            gridControl1.Parent = this;
+            gridControl1.Dock = DockStyle.Fill;
+            gridControl1.MainView = gridView1;
+            gridView1.OptionsView.ShowGroupPanel = false;
+
+            groupControl1.Parent = this;
+            groupControl1.Text = "RANDEVU İŞLEMLERİ";
+            groupControl1.Dock = DockStyle.Right;
+            groupControl1.Width = 350;
 
             btnKaydet.Click += btnKaydet_Click;
             btnSil.Click += btnSil_Click;
             btnSorgula.Click += btnSorgula_Click;
             gridView1.FocusedRowChanged += gridView1_FocusedRowChanged;
-           // gridView1.DoubleClick += GridView1_DoubleClick;
 
-            int y = 50;
-            new LabelControl { Parent = groupControl1, Text = "ID:", Location = new Point(20, y) };
-            txtID.Parent = groupControl1; txtID.Location = new Point(120, y); txtID.Width = 180; txtID.ReadOnly = true;
-            y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Tarih:", Location = new Point(20, y) };
-            deTarih.Parent = groupControl1; deTarih.Location = new Point(120, y);
-            y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Saat:", Location = new Point(20, y) };
-            teSaat.Parent = groupControl1; teSaat.Location = new Point(120, y);
-            y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Doktor:", Location = new Point(20, y) };
-            cmbDoktor.Parent = groupControl1; cmbDoktor.Location = new Point(120, y);
-            y += 40;
-            new LabelControl { Parent = groupControl1, Text = "Hasta TC:", Location = new Point(20, y) };
-            txtHastaTC.Parent = groupControl1; txtHastaTC.Location = new Point(120, y);
+            int y = 40;
+            int labelX = 20;
+            int controlX = 120;
+            int btnX = 65;
+
+            // ID
+            LabelControl lblID = new LabelControl
+            {
+                Parent = groupControl1,
+                Text = "ID:",
+                Location = new Point(labelX, y)
+            };
+            UIHelper.LabelStandart(lblID);
+
+            txtID.Parent = groupControl1;
+            txtID.Location = new Point(controlX, y);
+            txtID.Width = 180;
+            txtID.ReadOnly = true;
+            UIHelper.TextEditStandart(txtID);
+
             y += 35;
-            btnSorgula.Parent = groupControl1; btnSorgula.Text = "Sorgula"; btnSorgula.Location = new Point(120, y);
-            y += 45;
-            lblHastaBilgi.Parent = groupControl1; lblHastaBilgi.Text = "Hasta: ---"; lblHastaBilgi.Location = new Point(120, y);
-            y += 60;
-            btnKaydet.Parent = groupControl1; btnKaydet.Text = "Kaydet"; btnKaydet.Location = new Point(120, y);
-            y += 45;
-            btnSil.Parent = groupControl1; btnSil.Text = "Sil"; btnSil.Location = new Point(120, y);
-            y += 60;
 
+            // Tarih
+            LabelControl lblTarih = new LabelControl
+            {
+                Parent = groupControl1,
+                Text = "Tarih:",
+                Location = new Point(labelX, y)
+            };
+            UIHelper.LabelStandart(lblTarih);
+
+            deTarih.Parent = groupControl1;
+            deTarih.Location = new Point(controlX, y);
+            deTarih.Width = 180;
+
+            y += 35;
+
+            // Saat
+            LabelControl lblSaat = new LabelControl
+            {
+                Parent = groupControl1,
+                Text = "Saat:",
+                Location = new Point(labelX, y)
+            };
+            UIHelper.LabelStandart(lblSaat);
+
+            teSaat.Parent = groupControl1;
+            teSaat.Location = new Point(controlX, y);
+            teSaat.Width = 180;
+
+            y += 35;
+
+            // Doktor
+            LabelControl lblDoktor = new LabelControl
+            {
+                Parent = groupControl1,
+                Text = "Doktor:",
+                Location = new Point(labelX, y)
+            };
+            UIHelper.LabelStandart(lblDoktor);
+
+            cmbDoktor.Parent = groupControl1;
+            cmbDoktor.Location = new Point(controlX, y);
+            cmbDoktor.Width = 180;
+
+            y += 35;
+
+            // Hasta TC
+            LabelControl lblHastaTC = new LabelControl
+            {
+                Parent = groupControl1,
+                Text = "Hasta TC:",
+                Location = new Point(labelX, y)
+            };
+            UIHelper.LabelStandart(lblHastaTC);
+
+            txtHastaTC.Parent = groupControl1;
+            txtHastaTC.Location = new Point(controlX, y);
+            txtHastaTC.Width = 180;
+            UIHelper.TextEditStandart(txtHastaTC);
+
+            // Hasta TC'den sonra biraz boşluk
+            y += 30;
+
+            // 🔹 HASTA BİLGİ
+            lblHastaBilgi.Parent = groupControl1;
+            lblHastaBilgi.Text = "Hasta: ---";
+            lblHastaBilgi.Location = new Point(65, y);
+            UIHelper.LabelStandart(lblHastaBilgi);
+
+            y += 40;
+
+            // 🔹 SORGULA
+            btnSorgula.Parent = groupControl1;
+            btnSorgula.Text = "Sorgula";
+            btnSorgula.Location = new Point(65, y);
+            RandevuButonStil(btnSorgula);
+
+            y += 55;
+
+            // 🔹 KAYDET
+            btnKaydet.Parent = groupControl1;
+            btnKaydet.Text = "Kaydet";
+            btnKaydet.Location = new Point(65, y);
+            RandevuButonStil(btnKaydet);
+
+            y += 55;
+
+            // 🔹 SİL
+            btnSil.Parent = groupControl1;
+            btnSil.Text = "Sil";
+            btnSil.Location = new Point(65, y);
+            RandevuButonStil(btnSil);
+
+            y += 70;
+
+            // 🔹 AI DESTEK BUTONU (YUKARI TAŞINDI)
             btnAIDestek = new SimpleButton();
-
             btnAIDestek.Parent = groupControl1;
             btnAIDestek.Text = "MUAYENE İÇİN\nAI’DAN DESTEK AL";
-            btnAIDestek.Size = new Size(180, 70);
-            btnAIDestek.Location = new Point(120, y);
+            btnAIDestek.Size = new Size(220, 65);
+            btnAIDestek.Location = new Point(65, y);
 
-            btnAIDestek.Appearance.Font = new Font("Tahoma", 9, FontStyle.Bold);
-            btnAIDestek.Appearance.BackColor =
-    ColorTranslator.FromHtml("#1C4D8D");
-
+            btnAIDestek.Appearance.BackColor = ColorTranslator.FromHtml("#1C4D8D");
             btnAIDestek.Appearance.ForeColor = Color.White;
-
+            btnAIDestek.Appearance.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             btnAIDestek.Appearance.Options.UseBackColor = true;
             btnAIDestek.Appearance.Options.UseForeColor = true;
-
+            btnAIDestek.Appearance.Options.UseFont = true;
 
             btnAIDestek.Click += BtnAIDestek_Click;
+
+
             UIHelper.GroupStandart(groupControl1);
             GridHelper.StandartAyarla(gridControl1, gridView1);
-
-
         }
+        void RandevuButonStil(SimpleButton btn)
+        {
+            btn.Size = new Size(220, 45);
+            btn.Appearance.BackColor = ColorTranslator.FromHtml("#4988C4");
+            btn.Appearance.ForeColor = Color.White;
+            btn.Appearance.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+
+            btn.Appearance.Options.UseBackColor = true;
+            btn.Appearance.Options.UseForeColor = true;
+            btn.Appearance.Options.UseFont = true;
+        }
+
 
         private void GridView1_DoubleClick(object sender, EventArgs e)
         {

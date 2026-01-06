@@ -70,13 +70,13 @@ this.MinimizeBox = true;
         void BaslikOlustur()
         {
             lblBaslik = new LabelControl();
-            lblBaslik.Text = "GÖZ HASTANESİ";
+            lblBaslik.Text = "EyeNova Göz";
             lblBaslik.Appearance.Font = new Font("Segoe UI", 24, FontStyle.Bold);
             lblBaslik.Appearance.ForeColor = ColorTranslator.FromHtml("#0F2854");
             lblBaslik.Parent = this;
 
             lblAltBaslik = new LabelControl();
-            lblAltBaslik.Text = "Sağlıklı bakışlar için";
+            lblAltBaslik.Text = "Akıllı Teknoloji, Net Tanı, Kusursuz Görüş ";
             lblAltBaslik.Appearance.Font = new Font("Segoe UI", 11);
             lblAltBaslik.Appearance.ForeColor = ColorTranslator.FromHtml("#1C4D8D");
             lblAltBaslik.Parent = this;
@@ -98,6 +98,8 @@ this.MinimizeBox = true;
             lblKullanici.Text = "Kullanıcı Adı";
             lblKullanici.Location = new Point(40, y);
             lblKullanici.Parent = panelKart;
+            lblKullanici.Appearance.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            lblKullanici.Appearance.ForeColor = ColorTranslator.FromHtml("#0F2854");
 
             TxtKullaniciAdi.Parent = panelKart;
             TxtKullaniciAdi.Location = new Point(40, y + 20);
@@ -112,6 +114,8 @@ this.MinimizeBox = true;
             lblSifre.Text = "Şifre";
             lblSifre.Location = new Point(40, y);
             lblSifre.Parent = panelKart;
+            lblSifre.Appearance.Font = new Font("Segoe UI", 11, FontStyle.Bold);
+            lblSifre.Appearance.ForeColor = ColorTranslator.FromHtml("#0F2854");
 
             TxtSifre.Parent = panelKart;
             TxtSifre.Location = new Point(40, y + 20);

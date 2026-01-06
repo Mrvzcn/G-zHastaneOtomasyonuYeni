@@ -75,10 +75,10 @@
             // 
             // simpleButton1
             // 
-            this.simpleButton1.Location = new System.Drawing.Point(323, 769);
+            this.simpleButton1.Location = new System.Drawing.Point(63, 434);
             this.simpleButton1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.simpleButton1.Name = "simpleButton1";
-            this.simpleButton1.Size = new System.Drawing.Size(141, 70);
+            this.simpleButton1.Size = new System.Drawing.Size(182, 71);
             this.simpleButton1.TabIndex = 8;
             this.simpleButton1.Text = "GÜNCELLE";
             this.simpleButton1.Click += new System.EventHandler(this.simpleButton1_Click);
@@ -87,17 +87,17 @@
             // 
             this.BtnSil.Appearance.Font = new System.Drawing.Font("Tahoma", 7.8F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
             this.BtnSil.Appearance.Options.UseFont = true;
-            this.BtnSil.Location = new System.Drawing.Point(323, 679);
+            this.BtnSil.Location = new System.Drawing.Point(63, 319);
             this.BtnSil.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.BtnSil.Name = "BtnSil";
-            this.BtnSil.Size = new System.Drawing.Size(141, 65);
+            this.BtnSil.Size = new System.Drawing.Size(182, 70);
             this.BtnSil.TabIndex = 1;
-            this.BtnSil.Text = "Seçili Hastayı Sil";
+            this.BtnSil.Text = "SİL";
             this.BtnSil.Click += new System.EventHandler(this.BtnSil_Click);
             // 
             // txtAd
             // 
-            this.txtAd.Location = new System.Drawing.Point(134, 171);
+            this.txtAd.Location = new System.Drawing.Point(134, 163);
             this.txtAd.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.txtAd.Name = "txtAd";
             this.txtAd.Size = new System.Drawing.Size(143, 22);
@@ -114,7 +114,7 @@
             // 
             // mskTelefon
             // 
-            this.mskTelefon.Location = new System.Drawing.Point(134, 226);
+            this.mskTelefon.Location = new System.Drawing.Point(134, 221);
             this.mskTelefon.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.mskTelefon.Name = "mskTelefon";
             this.mskTelefon.Size = new System.Drawing.Size(143, 22);
@@ -142,12 +142,13 @@
             // 
             // labelControl2
             // 
-            this.labelControl2.Location = new System.Drawing.Point(34, 179);
+            this.labelControl2.Location = new System.Drawing.Point(19, 153);
             this.labelControl2.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl2.Name = "labelControl2";
-            this.labelControl2.Size = new System.Drawing.Size(60, 16);
+            this.labelControl2.Size = new System.Drawing.Size(65, 16);
             this.labelControl2.TabIndex = 8;
-            this.labelControl2.Text = "AD SOYAD";
+            this.labelControl2.Text = "AD SOYAD:";
+            this.labelControl2.Click += new System.EventHandler(this.labelControl2_Click);
             // 
             // labelControl4
             // 
@@ -160,7 +161,7 @@
             // 
             // labelControl5
             // 
-            this.labelControl5.Location = new System.Drawing.Point(34, 234);
+            this.labelControl5.Location = new System.Drawing.Point(22, 212);
             this.labelControl5.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.labelControl5.Name = "labelControl5";
             this.labelControl5.Size = new System.Drawing.Size(57, 16);
@@ -169,20 +170,24 @@
             // 
             // groupControl1
             // 
+            this.groupControl1.Controls.Add(this.simpleButton1);
             this.groupControl1.Controls.Add(this.labelControl5);
             this.groupControl1.Controls.Add(this.labelControl4);
+            this.groupControl1.Controls.Add(this.BtnSil);
             this.groupControl1.Controls.Add(this.labelControl2);
             this.groupControl1.Controls.Add(this.labelControl1);
             this.groupControl1.Controls.Add(this.txtID);
             this.groupControl1.Controls.Add(this.mskTelefon);
             this.groupControl1.Controls.Add(this.txtTC);
             this.groupControl1.Controls.Add(this.txtAd);
-            this.groupControl1.Location = new System.Drawing.Point(0, 560);
+            this.groupControl1.Dock = System.Windows.Forms.DockStyle.Right;
+            this.groupControl1.Location = new System.Drawing.Point(1092, 0);
             this.groupControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.groupControl1.Name = "groupControl1";
-            this.groupControl1.Size = new System.Drawing.Size(317, 304);
+            this.groupControl1.Size = new System.Drawing.Size(317, 836);
             this.groupControl1.TabIndex = 7;
             this.groupControl1.Text = "Seçili Hasta Bilgileri";
+            this.groupControl1.Paint += new System.Windows.Forms.PaintEventHandler(this.groupControl1_Paint);
             // 
             // FrmHastaListesi
             // 
@@ -192,9 +197,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 20F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1409, 836);
-            this.Controls.Add(this.simpleButton1);
             this.Controls.Add(this.groupControl1);
-            this.Controls.Add(this.BtnSil);
             this.Controls.Add(this.gridControl1);
             this.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
             this.Name = "FrmHastaListesi";

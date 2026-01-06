@@ -1,4 +1,5 @@
-﻿using GözHastaneOtomasyonu;
+﻿using DevExpress.XtraEditors;
+using GözHastaneOtomasyonu;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,11 +16,12 @@ namespace GözHastaneOtomasyonu
 {
     public partial class FrmHastaKayit : BaseForm
     {
-        TextBox TxtKullaniciAd;
-        TextBox TxtSifre;
+        TextEdit TxtKullaniciAd;
+        TextEdit TxtSifre;
 
-        Label lblKullanici;
-        Label lblSifre;
+        LabelControl lblKullanici;
+        LabelControl lblSifre;
+
 
         Panel panelOrta;
         public FrmHastaKayit()
@@ -27,6 +29,7 @@ namespace GözHastaneOtomasyonu
             InitializeComponent();
             OlusturOrtaPanel();
             KullaniciAlanlariniOlustur();
+            StilUygula();
 
             this.BackColor = Color.FromArgb(234, 246, 251); // Açık mavi arka plan
 
@@ -45,19 +48,21 @@ namespace GözHastaneOtomasyonu
         private void FrmHastaKayit_Load(object sender, EventArgs e)
         {
             BtnKaydet.Location = new Point(
-            TxtDogumTarihi.Left - 15,
-            TxtDogumTarihi.Bottom + 35
+            TxtDogumTarihi.Left - 65,
+            TxtDogumTarihi.Bottom + 75
    );
 
-            BtnKaydet.Size = new Size(180, 45); 
+            BtnKaydet.Size = new Size(220, 50);
             // DEVEXPRESS'E UYGUN RENK AYARLARI
-            BtnKaydet.Appearance.BackColor = Color.Teal;
+            BtnKaydet.Appearance.BackColor =
+     ColorTranslator.FromHtml("#4988C4");
             BtnKaydet.Appearance.ForeColor = Color.White;
-            BtnKaydet.Appearance.Font = new Font("Tahoma", 9, FontStyle.Bold);
+            BtnKaydet.Appearance.Font = new Font("Segoe UI", 10, FontStyle.Bold);
             BtnKaydet.Appearance.Options.UseBackColor = true;
             BtnKaydet.Appearance.Options.UseForeColor = true;
             BtnKaydet.Appearance.Options.UseFont = true;
-
+            BtnKaydet.AppearanceHovered.BackColor =
+    ColorTranslator.FromHtml("#1C4D8D");
             this.Resize += (s, args) =>
             {
                 OrtalaPanel();
@@ -156,38 +161,33 @@ namespace GözHastaneOtomasyonu
 
         void KullaniciAlanlariniOlustur()
         {
-            // Kullanıcı Adı Label
-            lblKullanici = new System.Windows.Forms.Label();
-            lblKullanici.Text = "Kullanıcı Adı:";
-            lblKullanici.Location = new Point(30, 300);
-            lblKullanici.AutoSize = true;
+            lblKullanici = new LabelControl();
+            lblKullanici.Text = "Kullanıcı Adı";
+            lblKullanici.Location = new Point(30, 340);
             panelOrta.Controls.Add(lblKullanici);
 
-            // Kullanıcı Adı TextBox
-            TxtKullaniciAd = new TextBox();
-            TxtKullaniciAd.Location = new Point(150, 295);
+            TxtKullaniciAd = new TextEdit();
+            TxtKullaniciAd.Location = new Point(150, 335);
             TxtKullaniciAd.Width = 200;
             panelOrta.Controls.Add(TxtKullaniciAd);
 
-            // Şifre Label
-            lblSifre = new System.Windows.Forms.Label();
-            lblSifre.Text = "Şifre:";
-            lblSifre.Location = new Point(30, 340);
-            lblSifre.AutoSize = true;
+            lblSifre = new LabelControl();
+            lblSifre.Text = "Şifre";
+            lblSifre.Location = new Point(30, 380);
             panelOrta.Controls.Add(lblSifre);
 
-            // Şifre TextBox
-            TxtSifre = new TextBox();
-            TxtSifre.Location = new Point(150, 335);
+            TxtSifre = new TextEdit();
+            TxtSifre.Location = new Point(150, 375);
             TxtSifre.Width = 200;
-            TxtSifre.UseSystemPasswordChar = true;
+            TxtSifre.Properties.UseSystemPasswordChar = true;
             panelOrta.Controls.Add(TxtSifre);
+
         }
 
         void OlusturOrtaPanel()
         {
             panelOrta = new Panel();
-            panelOrta.Size = new Size(700, 400);   // Hasta kayıt daha büyük
+            panelOrta.Size = new Size(700, 500);   // Hasta kayıt daha büyük
             panelOrta.BackColor = Color.White;     // 🔴 BEYAZ PANEL
             panelOrta.Parent = this;
             panelOrta.Padding = new Padding(15);
@@ -202,6 +202,26 @@ namespace GözHastaneOtomasyonu
             panelOrta.Left = (this.ClientSize.Width - panelOrta.Width) / 2;
             panelOrta.Top = (this.ClientSize.Height - panelOrta.Height) / 2;
         }
+        void StilUygula()
+        {
+            UIHelper.LabelStandart(LblTC);
+            UIHelper.LabelStandart(LblAdSoyad);
+            UIHelper.LabelStandart(LblTelefon);
+            UIHelper.LabelStandart(LblAdres);
+            UIHelper.LabelStandart(lblKullanici);
+            UIHelper.LabelStandart(lblSifre);
+            UIHelper.LabelStandart(LblCinsiyet);
+            UIHelper.LabelStandart(LblDogumTarihi);
+
+            UIHelper.TextEditStandart(TxtTC);
+            UIHelper.TextEditStandart(TxtAdSoyad);
+            UIHelper.TextEditStandart(TxtTelefon);
+            UIHelper.TextEditStandart(TxtKullaniciAd);
+            UIHelper.TextEditStandart(TxtSifre);
+
+            TxtAdres.Properties.Appearance.Font = new Font("Segoe UI", 10);
+        }
+
 
     }
 }

@@ -35,73 +35,97 @@ namespace GözHastaneOtomasyonu
             this.Text = "Randevu Al";
             this.ClientSize = new Size(800, 450);
             this.StartPosition = FormStartPosition.CenterScreen;
-            this.BackColor = Color.FromArgb(234, 246, 251); // Açık mavi arka plan
+            this.BackColor = Color.FromArgb(234, 246, 251);
 
-            // ORTA BEYAZ PANEL
+            // ORTA PANEL
             panelOrta = new Panel();
-            panelOrta.Size = new Size(450, 320);
-            panelOrta.BackColor = Color.White;
-            panelOrta.BorderStyle = BorderStyle.FixedSingle;
+            panelOrta.Size = new Size(480, 340);
             panelOrta.Parent = this;
+            UIHelper.PanelStandart(panelOrta);
 
-           
+            int y = 30;
+
+            // ===== HASTA TC =====
             LabelControl lblTC = new LabelControl()
             {
                 Text = "Hasta TC:",
-                Location = new Point(30, 30)
+                Location = new Point(40, y)
             };
+            UIHelper.LabelStandart(lblTC);
 
             txtHastaTC = new TextEdit()
             {
-                Location = new Point(140, 25),
-                Width = 200
+                Location = new Point(170, y - 5),
+                Width = 230
             };
+            UIHelper.TextEditStandart(txtHastaTC);
 
+            y += 45;
+
+            // ===== DOKTOR =====
             LabelControl lblDoktor = new LabelControl()
             {
                 Text = "Doktor:",
-                Location = new Point(30, 70)
+                Location = new Point(40, y)
             };
+            UIHelper.LabelStandart(lblDoktor);
 
             cmbDoktor = new ComboBoxEdit()
             {
-                Location = new Point(140, 65),
-                Width = 200
+                Location = new Point(170, y - 5),
+                Width = 230
             };
 
+            y += 45;
+
+            // ===== TARİH =====
             LabelControl lblTarih = new LabelControl()
             {
                 Text = "Tarih:",
-                Location = new Point(30, 110)
+                Location = new Point(40, y)
             };
+            UIHelper.LabelStandart(lblTarih);
 
             dateTarih = new DateEdit()
             {
-                Location = new Point(140, 105),
-                Width = 200
+                Location = new Point(170, y - 5),
+                Width = 230
             };
 
+            y += 45;
+
+            // ===== SAAT =====
             LabelControl lblSaat = new LabelControl()
             {
                 Text = "Saat:",
-                Location = new Point(30, 150)
+                Location = new Point(40, y)
             };
+            UIHelper.LabelStandart(lblSaat);
 
             cmbSaat = new ComboBoxEdit()
             {
-                Location = new Point(140, 145),
-                Width = 200
+                Location = new Point(170, y - 5),
+                Width = 230
             };
 
+            y += 65;
+
+            // ===== BUTON =====
             btnKaydet = new SimpleButton()
             {
                 Text = "Randevu Kaydet",
-                Location = new Point(140, 200),
-                Width = 200
+                Width = 260,
+                Height = 50,
+                Location = new Point(
+                    (panelOrta.Width - 260) / 2,
+                    y
+                )
             };
 
+            UIHelper.ButtonPrimary(btnKaydet);
             btnKaydet.Click += BtnKaydet_Click;
 
+            // ===== CONTROLS =====
             panelOrta.Controls.Add(lblTC);
             panelOrta.Controls.Add(txtHastaTC);
             panelOrta.Controls.Add(lblDoktor);
@@ -111,11 +135,8 @@ namespace GözHastaneOtomasyonu
             panelOrta.Controls.Add(lblSaat);
             panelOrta.Controls.Add(cmbSaat);
             panelOrta.Controls.Add(btnKaydet);
-
-            UIHelper.PanelStandart(panelOrta);
-
-
         }
+
 
         void DoktorlariDoldur()
         {

@@ -59,36 +59,62 @@ namespace GözHastaneOtomasyonu
         {
             panelSag = new Panel();
             panelSag.Dock = DockStyle.Right;
-            panelSag.Width = 300;
+            panelSag.Width = 320;
             panelSag.BackColor = Color.White;
             panelSag.BorderStyle = BorderStyle.FixedSingle;
             this.Controls.Add(panelSag);
 
-            int y = 20;
+            int y = 25;
 
-            panelSag.Controls.Add(Baslik("Randevu Detayı", y));
+            // BAŞLIK
+            Label lblBaslik = new Label
+            {
+                Text = "Randevu Detayı",
+                Font = new Font("Segoe UI", 12, FontStyle.Bold),
+                ForeColor = ColorTranslator.FromHtml("#0F2854"),
+                Location = new Point(20, y),
+                AutoSize = true
+            };
+            panelSag.Controls.Add(lblBaslik);
             y += 50;
 
+            // TARİH
             panelSag.Controls.Add(LabelOlustur("Tarih:", y));
             txtTarih = TextBoxOlustur(y);
             y += 40;
 
+            // SAAT
             panelSag.Controls.Add(LabelOlustur("Saat:", y));
             txtSaat = TextBoxOlustur(y);
             y += 40;
 
+            // DOKTOR
             panelSag.Controls.Add(LabelOlustur("Doktor:", y));
             txtDoktor = TextBoxOlustur(y);
             y += 60;
 
-            btnGuncelle = Buton("Güncelle", Color.DeepSkyBlue, y);
+            // ===== GÜNCELLE BUTONU =====
+            btnGuncelle = new SimpleButton();
+            btnGuncelle.Parent = panelSag;
+            btnGuncelle.Text = "Güncelle";
+            btnGuncelle.Size = new Size(260, 50);
+            btnGuncelle.Location = new Point(30, y);
+            UIHelper.ButtonPrimary(btnGuncelle);
             btnGuncelle.Click += BtnGuncelle_Click;
-            y += 45;
 
-            btnIptal = Buton("Randevu İptal", Color.IndianRed, y);
+            y += 65;
+
+            // ===== İPTAL BUTONU =====
+            btnIptal = new SimpleButton();
+            btnIptal.Parent = panelSag;
+            btnIptal.Text = "Randevu İptal";
+            btnIptal.Size = new Size(260, 50);
+            btnIptal.Location = new Point(30, y);
+            UIHelper.ButtonPrimary(btnIptal);
             btnIptal.Click += BtnIptal_Click;
-            UIHelper.PanelStandart(panelSag);
 
+            // Panel genel stil
+            UIHelper.PanelStandart(panelSag);
         }
 
         Label Baslik(string text, int y)
@@ -107,6 +133,8 @@ namespace GözHastaneOtomasyonu
             return new Label
             {
                 Text = text,
+                Font = new Font("Segoe UI", 10, FontStyle.Bold),
+                ForeColor = ColorTranslator.FromHtml("#0F2854"),
                 Location = new Point(20, y),
                 AutoSize = true
             };

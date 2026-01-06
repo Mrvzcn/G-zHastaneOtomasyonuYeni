@@ -2,6 +2,8 @@
 using System;
 using System.Data;
 using System.Data.SqlClient;
+using System.Drawing;
+using System.Reflection.Emit;
 using System.Windows.Forms;
 
 namespace GözHastaneOtomasyonu
@@ -96,14 +98,35 @@ namespace GözHastaneOtomasyonu
         private void FrmHastaListesi_Load(object sender, EventArgs e)
         {
             Listele();
+            UIHelper.LabelStandart(labelControl1);
+            UIHelper.LabelStandart(labelControl2);
+            UIHelper.LabelStandart(labelControl4);
+            UIHelper.LabelStandart(labelControl5);
 
-            // TASARIM DÜZELTME: Tabloyu sola yasla, paneli sağa al
-            gridControl1.Dock = DockStyle.Left;
-            gridControl1.Width = 600; // Tablo genişliği
-            gridControl1.Dock = DockStyle.Fill; // Panel geri kalan yeri kaplasın
+            // 🔵 SEÇİLİ HASTA BİLGİLERİ → SAĞ PANEL
+            groupControl1.Dock = DockStyle.Right;
+            groupControl1.Width = 320;
 
+            // 🔵 GRID → KALAN ALANI DOLDURSUN
+            gridControl1.Dock = DockStyle.Fill;
+
+            // Standart görünüm (başlık, padding vs.)
             UIHelper.GroupStandart(groupControl1);
+
+            Color yeniHastaRenk = ColorTranslator.FromHtml("#1C4D8D");
+
+            simpleButton1.Appearance.BackColor = yeniHastaRenk; // GÜNCELLE
+            simpleButton1.Appearance.ForeColor = Color.White;
+            simpleButton1.Appearance.Font = new Font("Tahoma", 9, FontStyle.Bold);
+
+            BtnSil.Appearance.BackColor = yeniHastaRenk; //  SİL
+            BtnSil.Appearance.ForeColor = Color.White;
+            BtnSil.Appearance.Font = new Font("Tahoma", 9, FontStyle.Bold);
+
+            simpleButton1.Height = 40;
+            BtnSil.Height = 40;
         }
+
 
         private void BtnSil_Click(object sender, EventArgs e)
         {
@@ -208,6 +231,15 @@ namespace GözHastaneOtomasyonu
             }
         }
 
+        private void groupControl1_Paint(object sender, PaintEventArgs e)
+        {
+
+        }
+
+        private void labelControl2_Click(object sender, EventArgs e)
+        {
+
+        }
     }
 }
 
