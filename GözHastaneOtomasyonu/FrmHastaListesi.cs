@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace GözHastaneOtomasyonu
 {
-    public partial class FrmHastaListesi : XtraForm
+    public partial class FrmHastaListesi : BaseForm
     {
         public FrmHastaListesi()
         {
@@ -102,7 +102,7 @@ namespace GözHastaneOtomasyonu
             gridControl1.Width = 600; // Tablo genişliği
             gridControl1.Dock = DockStyle.Fill; // Panel geri kalan yeri kaplasın
 
-
+            UIHelper.GroupStandart(groupControl1);
         }
 
         private void BtnSil_Click(object sender, EventArgs e)

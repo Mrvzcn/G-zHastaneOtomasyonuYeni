@@ -30,7 +30,7 @@
         {
             this.TxtKullaniciAdi = new DevExpress.XtraEditors.TextEdit();
             this.TxtSifre = new DevExpress.XtraEditors.TextEdit();
-            this.BtnGirisYap = new DevExpress.XtraEditors.SimpleButton();
+            //this.BtnGirisYap = new DevExpress.XtraEditors.SimpleButton();
             ((System.ComponentModel.ISupportInitialize)(this.TxtKullaniciAdi.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.TxtSifre.Properties)).BeginInit();
             this.SuspendLayout();
@@ -51,23 +51,24 @@
             // 
             // BtnGirisYap
             // 
-            this.BtnGirisYap.Location = new System.Drawing.Point(80, 305);
-            this.BtnGirisYap.Name = "BtnGirisYap";
-            this.BtnGirisYap.Size = new System.Drawing.Size(94, 29);
-            this.BtnGirisYap.TabIndex = 4;
-            this.BtnGirisYap.Text = "Giriş Yap";
-            this.BtnGirisYap.Click += new System.EventHandler(this.BtnGirisYap_Click);
+            //this.BtnGirisYap.Location = new System.Drawing.Point(80, 305);
+            //this.BtnGirisYap.Name = "BtnGirisYap";
+            //this.BtnGirisYap.Size = new System.Drawing.Size(94, 29);
+            //this.BtnGirisYap.TabIndex = 4;
+            //this.BtnGirisYap.Text = "Giriş Yap";
+            //this.BtnGirisYap.Click += new System.EventHandler(this.BtnGirisYap_Click);
             // 
             // FrmGiris
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(8F, 16F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(800, 450);
-            this.Controls.Add(this.BtnGirisYap);
-            this.Controls.Add(this.TxtSifre);
-            this.Controls.Add(this.TxtKullaniciAdi);
+           // this.Controls.Add(this.BtnGirisYap);
+           // this.Controls.Add(this.TxtSifre);
+            //this.Controls.Add(this.TxtKullaniciAdi);
             this.Name = "FrmGiris";
             this.Text = "Göz Hastanesi Otomasyonu - Kullanıcı Girişi";
+          //  this.Load += new System.EventHandler(this.FrmGiris_Load_1);
             ((System.ComponentModel.ISupportInitialize)(this.TxtKullaniciAdi.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.TxtSifre.Properties)).EndInit();
             this.ResumeLayout(false);
@@ -77,7 +78,7 @@
         #endregion
         private DevExpress.XtraEditors.TextEdit TxtKullaniciAdi;
         private DevExpress.XtraEditors.TextEdit TxtSifre;
-        private DevExpress.XtraEditors.SimpleButton BtnGirisYap;
+        //private DevExpress.XtraEditors.SimpleButton BtnGirisYap;
     }
 }
 

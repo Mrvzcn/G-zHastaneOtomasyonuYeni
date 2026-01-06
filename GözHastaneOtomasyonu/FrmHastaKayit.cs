@@ -13,7 +13,7 @@ using System.Windows.Forms;
 
 namespace GözHastaneOtomasyonu
 {
-    public partial class FrmHastaKayit : Form
+    public partial class FrmHastaKayit : BaseForm
     {
         TextBox TxtKullaniciAd;
         TextBox TxtSifre;
@@ -90,7 +90,8 @@ namespace GözHastaneOtomasyonu
 
             // 🔴 FORM BOYUTU DEĞİŞİNCE YENİDEN ORTALA
             this.Resize += (s, e2) => OrtalaPanel();
-        
+            UIHelper.PanelStandart(panelOrta);
+
 
         }
 

@@ -8,136 +8,169 @@ namespace GözHastaneOtomasyonu
 {
     public partial class FrmGiris : Form
     {
-        Panel panelOrta;
-
-        SimpleButton btnSifreGoster;
-        SimpleButton btnKayitOl;
+        Panel panelKart;
         LabelControl lblBaslik;
+        LabelControl lblAltBaslik;
 
+        SimpleButton btnGiris;
+        SimpleButton btnKayitOl;
+        SimpleButton btnSifreGoster;
 
         bool sifreGizli = true;
 
         public FrmGiris()
         {
             InitializeComponent();
-            this.BackColor = Color.FromArgb(234, 246, 251);
-
-            OlusturOrtaPanel();
-            BaslikYazisiOlustur();
-
-            TxtSifre.Properties.UseSystemPasswordChar = true;
-            SifreGozButonuOlustur();
-
-            this.Load += FrmGiris_Load;
+            FormAyarla();
+            KartOlustur();
+            BaslikOlustur();
+            AlanlariOlustur();
+            ButonlariOlustur();
 
             this.Resize += (s, e) =>
             {
-                OrtalaPanel();
-
-                if (lblBaslik != null)
-                    OrtalaBaslik();
+                KartOrtala();
+                BaslikOrtala();
             };
         }
 
-        void OlusturOrtaPanel()
+        // ================= FORM =================
+        void FormAyarla()
         {
-            panelOrta = new Panel();
-            panelOrta.Size = new Size(400, 260);
-            panelOrta.BackColor = Color.White; // 🔴 BEYAZ PANEL
-            panelOrta.Parent = this;
-            panelOrta.Padding = new Padding(10);
+            this.Text = "Göz Hastanesi Otomasyonu | Giriş";
+            this.BackColor = ColorTranslator.FromHtml("#BDE8F5");
+            this.ClientSize = new Size(900, 550);
+            this.StartPosition = FormStartPosition.CenterScreen;
+            this.FormBorderStyle = FormBorderStyle.FixedSingle;
+            this.FormBorderStyle = FormBorderStyle.Sizable;
+this.MaximizeBox = true;
+this.MinimizeBox = true;
 
-            // Hafif çerçeve hissi
-            panelOrta.BorderStyle = BorderStyle.FixedSingle;
-
-            OrtalaPanel();
         }
 
-        void OrtalaPanel()
+        // ================= KART =================
+        void KartOlustur()
         {
-            panelOrta.Left = (this.ClientSize.Width - panelOrta.Width) / 2;
-            panelOrta.Top = (this.ClientSize.Height - panelOrta.Height) / 2;
+            panelKart = new Panel();
+            panelKart.Size = new Size(420, 330);
+            panelKart.BackColor = Color.White;
+            panelKart.BorderStyle = BorderStyle.FixedSingle;
+            panelKart.Parent = this;
+
+            KartOrtala();
         }
 
-        // ================= LOAD =================
-        private void FrmGiris_Load(object sender, EventArgs e)
+        void KartOrtala()
         {
-            panelOrta.Controls.Clear();
+            panelKart.Left = (this.ClientSize.Width - panelKart.Width) / 2;
+            panelKart.Top = (this.ClientSize.Height - panelKart.Height) / 2;
+        }
 
-            int xLabel = 30;
-            int xInput = 140;
-            int y = 35;
+        // ================= BAŞLIK =================
+        void BaslikOlustur()
+        {
+            lblBaslik = new LabelControl();
+            lblBaslik.Text = "GÖZ HASTANESİ";
+            lblBaslik.Appearance.Font = new Font("Segoe UI", 24, FontStyle.Bold);
+            lblBaslik.Appearance.ForeColor = ColorTranslator.FromHtml("#0F2854");
+            lblBaslik.Parent = this;
 
-            // ---- Kullanıcı Adı ----
+            lblAltBaslik = new LabelControl();
+            lblAltBaslik.Text = "Sağlıklı bakışlar için";
+            lblAltBaslik.Appearance.Font = new Font("Segoe UI", 11);
+            lblAltBaslik.Appearance.ForeColor = ColorTranslator.FromHtml("#1C4D8D");
+            lblAltBaslik.Parent = this;
+
+            lblBaslik.Left = (this.ClientSize.Width - lblBaslik.Width) / 2;
+            lblBaslik.Top = panelKart.Top - 90;
+
+            lblAltBaslik.Left = (this.ClientSize.Width - lblAltBaslik.Width) / 2;
+            lblAltBaslik.Top = lblBaslik.Bottom + 5;
+        }
+
+        // ================= ALANLAR =================
+        void AlanlariOlustur()
+        {
+            int y = 40;
+
+            // Kullanıcı Adı
             LabelControl lblKullanici = new LabelControl();
-            lblKullanici.Text = "Kullanıcı Adı:";
-            lblKullanici.Location = new Point(xLabel, y);
-            panelOrta.Controls.Add(lblKullanici);
+            lblKullanici.Text = "Kullanıcı Adı";
+            lblKullanici.Location = new Point(40, y);
+            lblKullanici.Parent = panelKart;
 
-            TxtKullaniciAdi.Parent = panelOrta;
-            TxtKullaniciAdi.Location = new Point(xInput, y - 3);
-            TxtKullaniciAdi.Width = 200;
+            TxtKullaniciAdi.Parent = panelKart;
+            TxtKullaniciAdi.Location = new Point(40, y + 20);
+            TxtKullaniciAdi.Size = new Size(300, 28);
+            TxtKullaniciAdi.Properties.NullValuePrompt = "kullaniciadi";
+            TxtKullaniciAdi.Properties.Appearance.Font = new Font("Segoe UI", 10);
 
-            y += 45;
+            y += 70;
 
-            // ---- Şifre ----
+            // Şifre
             LabelControl lblSifre = new LabelControl();
-            lblSifre.Text = "Şifre:";
-            lblSifre.Location = new Point(xLabel, y);
-            panelOrta.Controls.Add(lblSifre);
+            lblSifre.Text = "Şifre";
+            lblSifre.Location = new Point(40, y);
+            lblSifre.Parent = panelKart;
 
-            TxtSifre.Parent = panelOrta;
-            TxtSifre.Location = new Point(xInput, y - 3);
-            TxtSifre.Width = 200;
+            TxtSifre.Parent = panelKart;
+            TxtSifre.Location = new Point(40, y + 20);
+            TxtSifre.Size = new Size(260, 28);
+            TxtSifre.Properties.UseSystemPasswordChar = true;
+            TxtSifre.Properties.NullValuePrompt = "••••••";
+            TxtSifre.Properties.Appearance.Font = new Font("Segoe UI", 10);
 
-            // Şifre göz butonu
-            btnSifreGoster.Parent = panelOrta;
-            btnSifreGoster.Location = new Point(TxtSifre.Right + 5, TxtSifre.Top);
-
-            y += 55;
-
-            // ---- Giriş Yap ----
-            BtnGirisYap.Parent = panelOrta;
-            BtnGirisYap.Text = "Giriş Yap";
-            BtnGirisYap.Size = new Size(200, 40);
-            BtnGirisYap.Location = new Point(xInput, y);
-
-            y += 55;
-
-            // ---- Yeni Hasta Kaydı ----
-            btnKayitOl = new SimpleButton();
-            btnKayitOl.Text = "Yeni Hasta Kaydı Oluştur";
-            btnKayitOl.Size = new Size(200, 35);
-            btnKayitOl.Location = new Point(xInput, y);
-            btnKayitOl.Appearance.BackColor = Color.Teal;
-            btnKayitOl.Appearance.ForeColor = Color.White;
-            btnKayitOl.Appearance.Options.UseBackColor = true;
-            btnKayitOl.Appearance.Options.UseForeColor = true;
-            btnKayitOl.Parent = panelOrta;
-
-            btnKayitOl.Click += (s, ev) =>
-            {
-                FrmHastaKayit frm = new FrmHastaKayit();
-                frm.ShowDialog();
-            };
-
-            OrtalaPanel();
-        }
-
-        // ================= ŞİFRE GÖZ =================
-        void SifreGozButonuOlustur()
-        {
+            // Şifre Göz
             btnSifreGoster = new SimpleButton();
-            btnSifreGoster.Size = new Size(30, TxtSifre.Height);
             btnSifreGoster.Text = "👁";
-            btnSifreGoster.Appearance.Font = new Font("Segoe UI", 10);
-            btnSifreGoster.Cursor = Cursors.Hand;
+            btnSifreGoster.Size = new Size(35, 28);
+            btnSifreGoster.Location = new Point(TxtSifre.Right + 5, TxtSifre.Top);
+            btnSifreGoster.Parent = panelKart;
 
             btnSifreGoster.Click += (s, e) =>
             {
                 sifreGizli = !sifreGizli;
                 TxtSifre.Properties.UseSystemPasswordChar = sifreGizli;
                 btnSifreGoster.Text = sifreGizli ? "👁" : "🙈";
+            };
+        }
+
+        // ================= BUTONLAR =================
+        void ButonlariOlustur()
+        {
+            // Giriş Yap
+            btnGiris = new SimpleButton();
+            btnGiris.Text = "GİRİŞ YAP";
+            btnGiris.Size = new Size(300, 45);
+            btnGiris.Location = new Point(40, 190);
+            btnGiris.Parent = panelKart;
+
+            btnGiris.Appearance.BackColor = ColorTranslator.FromHtml("#4988C4");
+            btnGiris.Appearance.ForeColor = Color.White;
+            btnGiris.Appearance.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btnGiris.Appearance.Options.UseBackColor = true;
+            btnGiris.Appearance.Options.UseForeColor = true;
+            btnGiris.Appearance.Options.UseFont = true;
+
+            btnGiris.Click += BtnGirisYap_Click;
+
+            // Kayıt Ol
+            btnKayitOl = new SimpleButton();
+            btnKayitOl.Text = "Yeni Hasta Kaydı Oluştur";
+            btnKayitOl.Size = new Size(300, 35);
+            btnKayitOl.Location = new Point(40, 245);
+            btnKayitOl.Parent = panelKart;
+
+            btnKayitOl.Appearance.BackColor = ColorTranslator.FromHtml("#1C4D8D");
+            btnKayitOl.Appearance.ForeColor = Color.White;
+            btnKayitOl.Appearance.Font = new Font("Segoe UI", 9, FontStyle.Bold);
+            btnKayitOl.Appearance.Options.UseBackColor = true;
+            btnKayitOl.Appearance.Options.UseForeColor = true;
+
+            btnKayitOl.Click += (s, e) =>
+            {
+                FrmHastaKayit frm = new FrmHastaKayit();
+                frm.ShowDialog();
             };
         }
 
@@ -148,22 +181,19 @@ namespace GözHastaneOtomasyonu
             {
                 SQLBaglantisi.BaglantiAc();
 
-                SqlCommand komut = new SqlCommand(
-                    "SELECT KullaniciRol FROM Kullanicilar WHERE KullaniciAd=@p1 AND Sifre=@p2",
+                SqlCommand cmd = new SqlCommand(
+                    "SELECT KullaniciRol FROM Kullanicilar WHERE KullaniciAd=@u AND Sifre=@s",
                     SQLBaglantisi.baglanti);
 
-                komut.Parameters.AddWithValue("@p1", TxtKullaniciAdi.Text.Trim());
-                komut.Parameters.AddWithValue("@p2", TxtSifre.Text);
+                cmd.Parameters.AddWithValue("@u", TxtKullaniciAdi.Text.Trim());
+                cmd.Parameters.AddWithValue("@s", TxtSifre.Text);
 
-                SqlDataReader dr = komut.ExecuteReader();
+                SqlDataReader dr = cmd.ExecuteReader();
 
                 if (dr.Read())
                 {
-                    SQLBaglantisi.AktifKullaniciRolu =
-                        dr["KullaniciRol"].ToString().Trim();
-
-                    SQLBaglantisi.AktifKullaniciAdi =
-                        TxtKullaniciAdi.Text.Trim();
+                    SQLBaglantisi.AktifKullaniciRolu = dr["KullaniciRol"].ToString();
+                    SQLBaglantisi.AktifKullaniciAdi = TxtKullaniciAdi.Text.Trim();
 
                     FrmAnaModul ana = new FrmAnaModul();
                     ana.Show();
@@ -171,7 +201,7 @@ namespace GözHastaneOtomasyonu
                 }
                 else
                 {
-                    XtraMessageBox.Show("Kullanıcı adı veya şifre hatalı!");
+                    XtraMessageBox.Show("Kullanıcı adı veya şifre hatalı!", "Uyarı");
                 }
 
                 dr.Close();
@@ -181,22 +211,15 @@ namespace GözHastaneOtomasyonu
                 SQLBaglantisi.BaglantiKapat();
             }
         }
-        void BaslikYazisiOlustur()
+        void BaslikOrtala()
         {
-            lblBaslik = new LabelControl();
-            lblBaslik.Text = "Sağlıklı günler dileriz";
-            lblBaslik.Appearance.Font = new Font("Tahoma", 26, FontStyle.Bold);
-            lblBaslik.Appearance.ForeColor = Color.FromArgb(0, 102, 153); // koyu mavi
-            lblBaslik.AutoSizeMode = LabelAutoSizeMode.Horizontal;
+            int ustBosluk = this.ClientSize.Height / 8;
 
-            lblBaslik.Parent = this;
-
-            OrtalaBaslik();
-        }
-        void OrtalaBaslik()
-        {
             lblBaslik.Left = (this.ClientSize.Width - lblBaslik.Width) / 2;
-            lblBaslik.Top = panelOrta.Top - 60;
+            lblBaslik.Top = ustBosluk;
+
+            lblAltBaslik.Left = (this.ClientSize.Width - lblAltBaslik.Width) / 2;
+            lblAltBaslik.Top = lblBaslik.Bottom + 5;
         }
 
     }

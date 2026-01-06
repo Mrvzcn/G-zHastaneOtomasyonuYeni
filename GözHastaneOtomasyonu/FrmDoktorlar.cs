@@ -8,7 +8,8 @@ using System.Data.SqlClient;
 
 namespace GözHastaneOtomasyonu
 {
-    public partial class FrmDoktorlar : DevExpress.XtraEditors.XtraForm
+    public partial class FrmDoktorlar : BaseForm
+
     {
         public FrmDoktorlar()
         {
@@ -226,6 +227,7 @@ namespace GözHastaneOtomasyonu
             btnGuncelle.Parent = groupControl1; btnGuncelle.Text = "Güncelle"; btnGuncelle.Location = new System.Drawing.Point(110, y); btnGuncelle.Width = 200;
             y += 40;
             btnSil.Parent = groupControl1; btnSil.Text = "Sil"; btnSil.Location = new System.Drawing.Point(110, y); btnSil.Width = 200;
+            UIHelper.GroupStandart(groupControl1);
         }
     }
 }

@@ -6,7 +6,7 @@ using System.Windows.Forms;
 
 namespace GözHastaneOtomasyonu
 {
-    public partial class FrmRandevuAl : XtraForm
+    public partial class FrmRandevuAl :BaseForm
     {
 
         Panel panelOrta;
@@ -111,6 +111,9 @@ namespace GözHastaneOtomasyonu
             panelOrta.Controls.Add(lblSaat);
             panelOrta.Controls.Add(cmbSaat);
             panelOrta.Controls.Add(btnKaydet);
+
+            UIHelper.PanelStandart(panelOrta);
+
 
         }
 

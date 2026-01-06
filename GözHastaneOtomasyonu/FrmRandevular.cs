@@ -1,15 +1,16 @@
-﻿using System;
-using System.Data;
-using System.Windows.Forms;
-using DevExpress.XtraEditors;
+﻿using DevExpress.XtraEditors;
 using DevExpress.XtraGrid;
 using DevExpress.XtraGrid.Views.Grid;
+using DevExpress.XtraSpellChecker.Native;
+using System;
+using System.Data;
 using System.Data.SqlClient;
 using System.Drawing;
+using System.Windows.Forms;
 
 namespace GözHastaneOtomasyonu
 {
-    public partial class FrmRandevular : DevExpress.XtraEditors.XtraForm
+    public partial class FrmRandevular : BaseForm
     {
         public FrmRandevular()
         {
@@ -238,10 +239,19 @@ namespace GözHastaneOtomasyonu
             btnAIDestek.Location = new Point(120, y);
 
             btnAIDestek.Appearance.Font = new Font("Tahoma", 9, FontStyle.Bold);
-            btnAIDestek.Appearance.BackColor = Color.DarkSlateBlue;
+            btnAIDestek.Appearance.BackColor =
+    ColorTranslator.FromHtml("#1C4D8D");
+
             btnAIDestek.Appearance.ForeColor = Color.White;
 
+            btnAIDestek.Appearance.Options.UseBackColor = true;
+            btnAIDestek.Appearance.Options.UseForeColor = true;
+
+
             btnAIDestek.Click += BtnAIDestek_Click;
+            UIHelper.GroupStandart(groupControl1);
+            GridHelper.StandartAyarla(gridControl1, gridView1);
+
 
         }
 

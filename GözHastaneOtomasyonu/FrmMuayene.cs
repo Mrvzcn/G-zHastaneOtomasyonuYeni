@@ -11,7 +11,7 @@ using System.Windows.Forms;
 
 namespace GözHastaneOtomasyonu
 {
-    public partial class FrmMuayene : XtraForm
+    public partial class FrmMuayene : BaseForm
     {
         // === PANELLER ===
         GroupControl groupHastaBilgi = new GroupControl();
@@ -182,6 +182,10 @@ namespace GözHastaneOtomasyonu
             btnKaydet.Bounds = new Rectangle(20, 505, 380, 40);
             btnKaydet.Appearance.Font = new Font("Tahoma", 9, FontStyle.Bold);
             btnKaydet.Click += BtnKaydet_Click;
+            UIHelper.GroupStandart(groupHastaBilgi);
+            UIHelper.GroupStandart(groupAIOntani);
+            UIHelper.GroupStandart(groupMuayene);
+            UIHelper.GroupStandart(groupIlkMuayene);
 
         }
 

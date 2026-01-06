@@ -9,7 +9,7 @@ using DevExpress.XtraGrid.Views.Grid;
 
 namespace GözHastaneOtomasyonu
 {
-    public partial class FrmHastaRandevularim : Form
+    public partial class FrmHastaRandevularim : BaseForm
     {
         GridControl grid;
         GridView view;
@@ -87,6 +87,8 @@ namespace GözHastaneOtomasyonu
 
             btnIptal = Buton("Randevu İptal", Color.IndianRed, y);
             btnIptal.Click += BtnIptal_Click;
+            UIHelper.PanelStandart(panelSag);
+
         }
 
         Label Baslik(string text, int y)
