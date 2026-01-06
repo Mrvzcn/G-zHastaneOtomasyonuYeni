@@ -57,18 +57,33 @@ namespace GözHastaneOtomasyonu
             try
             {
                 DataTable dt = new DataTable();
-                // SQL JOIN kullanarak TC yerine Hasta Adını da listeye ekliyoruz
-                string sorgu = @"SELECT R.RandevuID, R.RandevuTarih, R.RandevuSaat, R.RandevuDoktor, 
-                         R.RandevuHastaTC, H.AdSoyad AS 'Hasta Adı' 
+
+                string sorgu = @"SELECT 
+                            R.RandevuID, 
+                            R.RandevuTarih, 
+                            R.RandevuSaat, 
+                            R.RandevuDoktor, 
+                            R.RandevuHastaTC, 
+                            H.AdSoyad AS 'Hasta Adı' 
                          FROM RandevuBilgileri R 
-                         LEFT JOIN HastaBilgileri H ON R.RandevuHastaTC = H.TCKimlikNo";
+                         LEFT JOIN HastaBilgileri H 
+                            ON R.RandevuHastaTC = H.TCKimlikNo";
 
                 SqlDataAdapter da = new SqlDataAdapter(sorgu, SQLBaglantisi.baglanti);
                 da.Fill(dt);
+
                 gridControl1.DataSource = dt;
+
+                // 🔒 KULLANICIDAN ID'Yİ GİZLE (DOĞRU YER)
+                if (gridView1.Columns["RandevuID"] != null)
+                    gridView1.Columns["RandevuID"].Visible = false;
             }
-            catch (Exception ex) { MessageBox.Show("Listeleme hatası: " + ex.Message); }
+            catch (Exception ex)
+            {
+                MessageBox.Show("Listeleme hatası: " + ex.Message);
+            }
         }
+
         void DoktorlariGetir()
         {
             try
@@ -346,6 +361,9 @@ namespace GözHastaneOtomasyonu
 
             UIHelper.GroupStandart(groupControl1);
             GridHelper.StandartAyarla(gridControl1, gridView1);
+
+            lblID.Visible = false;
+            txtID.Visible = false;
         }
         void RandevuButonStil(SimpleButton btn)
         {

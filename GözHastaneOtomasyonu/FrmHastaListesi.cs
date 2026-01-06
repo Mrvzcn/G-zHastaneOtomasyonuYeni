@@ -39,23 +39,21 @@ namespace GözHastaneOtomasyonu
                 if (rol == "Doktor")
                 {
                     sorgu = @"
-                SELECT DISTINCT h.*
-                FROM HastaBilgileri h
-                INNER JOIN RandevuBilgileri r
-                    ON r.RandevuHastaTC = h.TCKimlikNo
-                WHERE r.RandevuDoktor = @doktorAdi";
+            SELECT DISTINCT h.*
+            FROM HastaBilgileri h
+            INNER JOIN RandevuBilgileri r
+                ON r.RandevuHastaTC = h.TCKimlikNo
+            WHERE r.RandevuDoktor = @doktorAdi";
                 }
                 else if (rol == "Hasta")
                 {
-                    // 🔴 HASTA SADECE KENDİNİ GÖRÜR
                     sorgu = @"
-                SELECT *
-                FROM HastaBilgileri
-                WHERE KullaniciAd = @kullaniciAdi";
+            SELECT *
+            FROM HastaBilgileri
+            WHERE KullaniciAd = @kullaniciAdi";
                 }
                 else
                 {
-                    // Admin, Sekreter vb.
                     sorgu = "SELECT * FROM HastaBilgileri";
                 }
 
@@ -77,9 +75,18 @@ namespace GözHastaneOtomasyonu
                     );
                 }
 
+                // ✅ dt BURADA tanımlı
                 DataTable dt = new DataTable();
                 da.Fill(dt);
+
+                // ✅ dt BURADA kullanılıyor (DOĞRU)
                 gridControl1.DataSource = dt;
+
+                // 🔒 ID SÜTUNUNU GİZLE
+                if (gridView1.Columns["HastaID"] != null)
+                {
+                    gridView1.Columns["HastaID"].Visible = false;
+                }
             }
             catch (Exception ex)
             {
@@ -94,11 +101,10 @@ namespace GözHastaneOtomasyonu
 
 
 
-
         private void FrmHastaListesi_Load(object sender, EventArgs e)
         {
             Listele();
-            UIHelper.LabelStandart(labelControl1);
+           //UIHelper.LabelStandart(labelControl1);
             UIHelper.LabelStandart(labelControl2);
             UIHelper.LabelStandart(labelControl4);
             UIHelper.LabelStandart(labelControl5);
@@ -170,7 +176,7 @@ namespace GözHastaneOtomasyonu
             if (dr != null)
             {
                 // SQL sorgunda sütun başlığı neyse tırnak içine onu yazmalısın
-                txtID.Text = dr["HastaID"].ToString();
+                //txtID.Text = dr["HastaID"].ToString();
                 txtAd.Text = dr["AdSoyad"].ToString(); // "HastaAd" yerine "Ad Soyad" yazdık
                 txtTC.Text = dr["TCKimlikNo"].ToString();
                 mskTelefon.Text = dr["Telefon"].ToString();
@@ -194,12 +200,7 @@ namespace GözHastaneOtomasyonu
         
             private void simpleButton1_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txtID.Text))
-            {
-                XtraMessageBox.Show("Lütfen güncellenecek hastayı seçin.", "Uyarı",
-                    MessageBoxButtons.OK, MessageBoxIcon.Warning);
-                return;
-            }
+            
 
             try
             {
@@ -212,7 +213,9 @@ namespace GözHastaneOtomasyonu
                 komut.Parameters.AddWithValue("@p1", txtAd.Text);
                 komut.Parameters.AddWithValue("@p2", txtTC.Text);
                 komut.Parameters.AddWithValue("@p3", mskTelefon.Text);
-                komut.Parameters.AddWithValue("@p4", txtID.Text);
+                komut.Parameters.AddWithValue("@p4",
+    gridView1.GetFocusedRowCellValue("HastaID"));
+
 
                 komut.ExecuteNonQuery();
 

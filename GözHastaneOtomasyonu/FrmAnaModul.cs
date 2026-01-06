@@ -1,7 +1,9 @@
-﻿using DevExpress.XtraBars;
+﻿using DevExpress.LookAndFeel;
+using DevExpress.Utils;
+using DevExpress.Utils.Svg;
+using DevExpress.XtraBars;
 using DevExpress.XtraBars.Ribbon;
 using DevExpress.XtraEditors;
-using DevExpress.LookAndFeel;
 using System;
 using System.Drawing;
 using System.Windows.Forms;
@@ -11,6 +13,7 @@ namespace GözHastaneOtomasyonu
     public partial class FrmAnaModul : RibbonForm
     {
         BarButtonItem btnRandevuAl;
+        BarButtonItem btnCikis;
 
         public FrmAnaModul()
         {
@@ -41,6 +44,7 @@ namespace GözHastaneOtomasyonu
             // DİNAMİK BUTON
             // ======================
             RandevuAlButonuOlustur();
+            CikisButonuOlustur();
         }
 
         // =======================
@@ -210,5 +214,68 @@ namespace GözHastaneOtomasyonu
                 }
             }
         }
+        void CikisButonuOlustur()
+        {
+            btnCikis = new BarButtonItem
+            {
+                Caption = "Çıkış Yap",
+                Id = ribbon.Manager.GetNewItemId(),
+                Alignment = BarItemLinkAlignment.Right
+            };
+
+            // 🎨 TASARIM
+            btnCikis.Appearance.Font = new Font("Segoe UI", 10, FontStyle.Bold);
+            btnCikis.Appearance.ForeColor = Color.White;
+            btnCikis.Appearance.Options.UseFont = true;
+            btnCikis.Appearance.Options.UseForeColor = true;
+
+            // 🔴 KIRMIZI TON (ÇIKIŞ VURGUSU)
+            btnCikis.ItemAppearance.Normal.BackColor = ColorTranslator.FromHtml("#C62828");
+            btnCikis.ItemAppearance.Hovered.BackColor = ColorTranslator.FromHtml("#D32F2F");
+            btnCikis.ItemAppearance.Pressed.BackColor = ColorTranslator.FromHtml("#B71C1C");
+
+            btnCikis.ItemAppearance.Normal.Options.UseBackColor = true;
+            btnCikis.ItemAppearance.Hovered.Options.UseBackColor = true;
+            btnCikis.ItemAppearance.Pressed.Options.UseBackColor = true;
+
+            // 🖼️ İKON (DevExpress hazır ikon)
+            btnCikis.ImageOptions.SvgImage = SvgImage.FromResources(
+                "DevExpress.Images.Actions.Close.svg",
+                typeof(FrmAnaModul).Assembly
+            );
+
+            btnCikis.ItemClick += BtnCikis_ItemClick;
+            ribbon.Items.Add(btnCikis);
+
+            // 📍 SAĞ ÜSTE EKLE
+            RibbonPage page = ribbon.Pages[0];
+
+            RibbonPageGroup cikisGroup = new RibbonPageGroup();
+            cikisGroup.Alignment = RibbonPageGroupAlignment.Far;
+            cikisGroup.AllowTextClipping = false;
+
+            page.Groups.Add(cikisGroup);
+            cikisGroup.ItemLinks.Add(btnCikis);
+        }
+        private void BtnCikis_ItemClick(object sender, ItemClickEventArgs e)
+        {
+            DialogResult sonuc = MessageBox.Show(
+                "Çıkış yapmak istiyor musunuz?",
+                "Çıkış",
+                MessageBoxButtons.YesNo,
+                MessageBoxIcon.Question);
+
+            if (sonuc == DialogResult.Yes)
+            {
+                SQLBaglantisi.AktifKullaniciAdi = null;
+                SQLBaglantisi.AktifKullaniciRolu = null;
+
+                FrmGiris frm = new FrmGiris();
+                frm.Show();
+
+                this.Close();
+            }
+        }
+
     }
 }

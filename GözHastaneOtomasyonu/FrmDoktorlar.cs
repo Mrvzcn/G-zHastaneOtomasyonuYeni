@@ -62,15 +62,24 @@ namespace GözHastaneOtomasyonu
             try
             {
                 DataTable dt = new DataTable();
-                SqlDataAdapter da = new SqlDataAdapter("Select * From DoktorBilgileri", SQLBaglantisi.baglanti);
+                SqlDataAdapter da = new SqlDataAdapter(
+                    "SELECT * FROM DoktorBilgileri",
+                    SQLBaglantisi.baglanti
+                );
+
                 da.Fill(dt);
                 gridControl1.DataSource = dt;
+
+                // 🔒 KULLANICIDAN ID'Yİ GİZLE (DOĞRU YER)
+                if (gridView1.Columns["DoktorID"] != null)
+                    gridView1.Columns["DoktorID"].Visible = false;
             }
             catch (Exception ex)
             {
                 MessageBox.Show("Listeleme hatası: " + ex.Message);
             }
         }
+
 
         // 2. Branş Ayarlama (Sadece Göz)
         void BransGetir()
@@ -290,6 +299,8 @@ namespace GözHastaneOtomasyonu
             UIHelper.ButtonPrimary(btnKaydet);
             UIHelper.ButtonPrimary(btnGuncelle);
             UIHelper.ButtonPrimary(btnSil);
+            lblID.Visible = false;
+            txtID.Visible = false;
 
         }
 

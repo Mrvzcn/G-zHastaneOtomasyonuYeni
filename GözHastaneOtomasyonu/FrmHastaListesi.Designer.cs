@@ -35,8 +35,6 @@
             this.txtAd = new DevExpress.XtraEditors.TextEdit();
             this.txtTC = new DevExpress.XtraEditors.TextEdit();
             this.mskTelefon = new DevExpress.XtraEditors.TextEdit();
-            this.txtID = new DevExpress.XtraEditors.TextEdit();
-            this.labelControl1 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl2 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl4 = new DevExpress.XtraEditors.LabelControl();
             this.labelControl5 = new DevExpress.XtraEditors.LabelControl();
@@ -46,7 +44,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTC.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.mskTelefon.Properties)).BeginInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).BeginInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).BeginInit();
             this.groupControl1.SuspendLayout();
             this.SuspendLayout();
@@ -120,26 +117,6 @@
             this.mskTelefon.Size = new System.Drawing.Size(143, 22);
             this.mskTelefon.TabIndex = 6;
             // 
-            // txtID
-            // 
-            this.txtID.Location = new System.Drawing.Point(134, 56);
-            this.txtID.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.txtID.Name = "txtID";
-            this.txtID.Properties.ReadOnly = true;
-            this.txtID.Size = new System.Drawing.Size(143, 22);
-            this.txtID.TabIndex = 2;
-            // 
-            // labelControl1
-            // 
-            this.labelControl1.Appearance.Font = new System.Drawing.Font("Tahoma", 9F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(162)));
-            this.labelControl1.Appearance.Options.UseFont = true;
-            this.labelControl1.Location = new System.Drawing.Point(34, 61);
-            this.labelControl1.Margin = new System.Windows.Forms.Padding(3, 4, 3, 4);
-            this.labelControl1.Name = "labelControl1";
-            this.labelControl1.Size = new System.Drawing.Size(21, 18);
-            this.labelControl1.TabIndex = 7;
-            this.labelControl1.Text = "ID:";
-            // 
             // labelControl2
             // 
             this.labelControl2.Location = new System.Drawing.Point(19, 153);
@@ -175,8 +152,6 @@
             this.groupControl1.Controls.Add(this.labelControl4);
             this.groupControl1.Controls.Add(this.BtnSil);
             this.groupControl1.Controls.Add(this.labelControl2);
-            this.groupControl1.Controls.Add(this.labelControl1);
-            this.groupControl1.Controls.Add(this.txtID);
             this.groupControl1.Controls.Add(this.mskTelefon);
             this.groupControl1.Controls.Add(this.txtTC);
             this.groupControl1.Controls.Add(this.txtAd);
@@ -208,7 +183,6 @@
             ((System.ComponentModel.ISupportInitialize)(this.txtAd.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.txtTC.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.mskTelefon.Properties)).EndInit();
-            ((System.ComponentModel.ISupportInitialize)(this.txtID.Properties)).EndInit();
             ((System.ComponentModel.ISupportInitialize)(this.groupControl1)).EndInit();
             this.groupControl1.ResumeLayout(false);
             this.groupControl1.PerformLayout();
@@ -225,8 +199,6 @@
         private DevExpress.XtraEditors.TextEdit txtAd;
         private DevExpress.XtraEditors.TextEdit txtTC;
         private DevExpress.XtraEditors.TextEdit mskTelefon;
-        private DevExpress.XtraEditors.TextEdit txtID;
-        private DevExpress.XtraEditors.LabelControl labelControl1;
         private DevExpress.XtraEditors.LabelControl labelControl2;
         private DevExpress.XtraEditors.LabelControl labelControl4;
         private DevExpress.XtraEditors.LabelControl labelControl5;
